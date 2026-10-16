@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compound — Learn How Investing Grows</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="#top" class="logo"><span class="logo-mark">◆</span> Compound</a>
+    <ul>
+      <li><a href="#calculator">Calculator</a></li>
+      <li><a href="#early">Start early</a></li>
+      <li><a href="#assets">Assets</a></li>
+      <li><a href="#mix">Your mix</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="wrap hero-inner">
+      <p class="eyebrow">A friendly guide to investing</p>
+      <h1>Time is the most powerful thing you can invest.</h1>
+      <p class="lede">
+        Compound growth means your earnings start earning too. Play with the tools below
+        to see how small, steady amounts can turn into something big.
+      </p>
+      <div class="hero-figure">
+        <span class="hero-label">$10,000 left alone for 40 years at 7% a year becomes</span>
+        <span class="hero-number" id="heroNumber">$0</span>
+      </div>
+      <a href="#calculator" class="btn">Try the calculator →</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ Calculator ============ -->
+    <section id="calculator" class="section">
+      <div class="wrap">
+        <p class="eyebrow">Tool 1</p>
+        <h2>Compound growth calculator</h2>
+        <p class="section-lede">Change any number to see how your money could grow.</p>
+
+        <div class="calc">
+          <form class="calc-inputs" id="calcForm">
+            <label>
+              <span>Starting amount</span>
+              <div class="field"><i>$</i><input type="number" id="initial" value="5000" min="0" step="500" /></div>
+            </label>
+            <label>
+              <span>Added every month</span>
+              <div class="field"><i>$</i><input type="number" id="monthly" value="300" min="0" step="50" /></div>
+            </label>
+            <label>
+              <span>Yearly return <output id="rateOut">7%</output></span>
+              <input type="range" id="rate" min="0" max="12" step="0.5" value="7" />
+            </label>
+            <label>
+              <span>Years <output id="yearsOut">30</output></span>
+              <input type="range" id="years" min="1" max="50" step="1" value="30" />
+            </label>
+          </form>
+
+          <div class="calc-results">
+            <div class="tiles">
+              <div class="tile">
+                <span class="tile-label">Final value</span>
+                <span class="tile-value" id="finalValue">—</span>
+              </div>
+              <div class="tile">
+                <span class="tile-label"><b class="swatch" style="background:var(--series-1)"></b>You put in</span>
+                <span class="tile-value" id="totalIn">—</span>
+              </div>
+              <div class="tile">
+                <span class="tile-label"><b class="swatch" style="background:var(--series-2)"></b>Growth earned</span>
+                <span class="tile-value" id="growth">—</span>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-head">
+                <h3>Portfolio value by year</h3>
+                <div class="legend">
+                  <span><b class="swatch" style="background:var(--series-1)"></b>Your contributions</span>
+                  <span><b class="swatch" style="background:var(--series-2)"></b>Growth</span>
+                </div>
+              </div>
+              <div class="chart" id="growthChart"></div>
+              <details class="table-view">
+                <summary>Show as table</summary>
+                <div class="table-scroll"><table id="growthTable"></table></div>
+              </details>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Start early ============ -->
+    <section id="early" class="section alt">
+      <div class="wrap">
+        <p class="eyebrow">Tool 2</p>
+        <h2>Why starting early matters</h2>
+        <p class="section-lede">
+          <strong>Maya</strong> invests $300 a month from age 25 to 35, then stops for good.
+          <strong>Leo</strong> starts at 35 and keeps investing $300 a month until 65.
+          Both earn <span id="earlyRateText">7%</span> a year.
+        </p>
+
+        <div class="story-stats">
+          <div class="tile">
+            <span class="tile-label"><b class="swatch" style="background:var(--series-1)"></b>Maya put in</span>
+            <span class="tile-value" id="mayaIn">—</span>
+            <span class="tile-sub">ends with <strong id="mayaEnd">—</strong></span>
+          </div>
+          <div class="tile">
+            <span class="tile-label"><b class="swatch" style="background:var(--series-2)"></b>Leo put in</span>
+            <span class="tile-value" id="leoIn">—</span>
+            <span class="tile-sub">ends with <strong id="leoEnd">—</strong></span>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-head">
+            <h3>Balance by age</h3>
+            <div class="legend">
+              <span><b class="swatch" style="background:var(--series-1)"></b>Maya (starts at 25)</span>
+              <span><b class="swatch" style="background:var(--series-2)"></b>Leo (starts at 35)</span>
+            </div>
+          </div>
+          <div class="chart" id="earlyChart"></div>
+        </div>
+        <p class="note">Maya put in a third as much money as Leo, but her money had ten more years to compound.</p>
+      </div>
+    </section>
+
+    <!-- ============ Rule of 72 ============ -->
+    <section class="section">
+      <div class="wrap rule72">
+        <div>
+          <p class="eyebrow">Quick trick</p>
+          <h2>The Rule of 72</h2>
+          <p class="section-lede">
+            Divide 72 by your yearly return to estimate how many years it takes your money to double.
+          </p>
+          <label class="rule-input">
+            <span>Yearly return <output id="r72Out">8%</output></span>
+            <input type="range" id="r72" min="1" max="15" step="0.5" value="8" />
+          </label>
+        </div>
+        <div class="rule-answer">
+          <span class="rule-big" id="r72Years">9</span>
+          <span class="rule-small">years to double</span>
+          <div class="doubles" id="doubles"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Asset classes ============ -->
+    <section id="assets" class="section alt">
+      <div class="wrap">
+        <p class="eyebrow">The building blocks</p>
+        <h2>Common types of investments</h2>
+        <p class="section-lede">Higher possible returns usually come with bigger ups and downs.</p>
+
+        <div class="cards">
+          <article class="card">
+            <div class="card-icon">📈</div>
+            <h3>Stocks</h3>
+            <p>Small pieces of ownership in companies. They have the most growth potential, but prices can swing a lot from year to year.</p>
+            <div class="risk" data-level="5"><span>Risk</span><div class="dots"></div></div>
+          </article>
+          <article class="card">
+            <div class="card-icon">🧺</div>
+            <h3>Index funds &amp; ETFs</h3>
+            <p>One purchase buys a whole basket of stocks or bonds, such as the 500 largest US companies. They're diversified and usually cheap.</p>
+            <div class="risk" data-level="4"><span>Risk</span><div class="dots"></div></div>
+          </article>
+          <article class="card">
+            <div class="card-icon">🏠</div>
+            <h3>Real estate</h3>
+            <p>Property, owned directly or through REITs. It can pay rental income and grow in value, but buying or selling it directly is slow.</p>
+            <div class="risk" data-level="3"><span>Risk</span><div class="dots"></div></div>
+          </article>
+          <article class="card">
+            <div class="card-icon">📜</div>
+            <h3>Bonds</h3>
+            <p>Loans to governments or companies that pay you interest. They're steadier than stocks, but long-term growth is usually lower.</p>
+            <div class="risk" data-level="2"><span>Risk</span><div class="dots"></div></div>
+          </article>
+          <article class="card">
+            <div class="card-icon">💵</div>
+            <h3>Cash &amp; savings</h3>
+            <p>High-yield savings and money market funds. Very safe and easy to access, but inflation can slowly eat away at it.</p>
+            <div class="risk" data-level="1"><span>Risk</span><div class="dots"></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Allocation ============ -->
+    <section id="mix" class="section">
+      <div class="wrap">
+        <p class="eyebrow">Tool 3</p>
+        <h2>Build a sample mix</h2>
+        <p class="section-lede">
+          Move the sliders to split 100% between stocks, bonds and cash. The other two adjust automatically.
+        </p>
+
+        <div class="mix">
+          <div class="mix-controls">
+            <label><span><b class="swatch" style="background:var(--series-1)"></b>Stocks <output id="stocksOut"></output></span>
+              <input type="range" id="stocks" min="0" max="100" value="60" data-key="stocks" /></label>
+            <label><span><b class="swatch" style="background:var(--series-2)"></b>Bonds <output id="bondsOut"></output></span>
+              <input type="range" id="bonds" min="0" max="100" value="30" data-key="bonds" /></label>
+            <label><span><b class="swatch" style="background:var(--series-3)"></b>Cash <output id="cashOut"></output></span>
+              <input type="range" id="cash" min="0" max="100" value="10" data-key="cash" /></label>
+
+            <div class="presets">
+              <button type="button" data-preset="20,50,30">Careful</button>
+              <button type="button" data-preset="60,30,10">Balanced</button>
+              <button type="button" data-preset="90,10,0">Growth</button>
+            </div>
+          </div>
+
+          <div class="mix-result">
+            <div class="mix-bar" id="mixBar"></div>
+            <div class="tiles">
+              <div class="tile">
+                <span class="tile-label">Rough long-run average return</span>
+                <span class="tile-value" id="mixReturn">—</span>
+              </div>
+              <div class="tile">
+                <span class="tile-label">A bad year might look like</span>
+                <span class="tile-value" id="mixWorst">—</span>
+              </div>
+            </div>
+            <p class="note small">
+              Illustrative assumptions only: stocks about 10% a year on average (−37% in a bad year),
+              bonds about 5% (−13%), cash about 3% (0%). These are rough historical ballparks, not predictions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section id="faq" class="section alt">
+      <div class="wrap narrow">
+        <p class="eyebrow">Good to know</p>
+        <h2>Frequently asked questions</h2>
+        <div class="faq">
+          <details>
+            <summary>How much money do I need to start?</summary>
+            <p>Very little. Many brokers have no minimums and let you buy fractional shares, so you can start with $10. Building the habit matters more than the amount.</p>
+          </details>
+          <details>
+            <summary>What is diversification?</summary>
+            <p>Spreading money across many investments so one bad performer can't sink you. An index fund that holds hundreds of companies is an easy way to diversify.</p>
+          </details>
+          <details>
+            <summary>Should I try to time the market?</summary>
+            <p>Research consistently shows that even professionals struggle to predict short-term moves. Investing a steady amount on a schedule (dollar-cost averaging) removes the guesswork.</p>
+          </details>
+          <details>
+            <summary>Why do fees matter so much?</summary>
+            <p>A 1% yearly fee sounds tiny, but over 30 years it can take a large share of your final balance, because the money lost to fees never gets to compound. Low-cost funds help.</p>
+          </details>
+          <details>
+            <summary>What should I do before investing?</summary>
+            <p>A common order is: build an emergency fund of a few months of expenses, pay off high-interest debt, take any employer retirement match, and then invest more.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p><strong>Educational purposes only.</strong> This site is not financial advice. All figures are hypothetical,
+      use constant returns, and ignore taxes, fees and inflation. Real investments go up and down and can lose value.
+      Consider talking to a licensed financial professional about your own situation.</p>
+    </div>
+  </footer>
+
+  <div class="tooltip" id="tooltip" hidden></div>
+  <script src="script.js"></script>
+</body>
+</html>
